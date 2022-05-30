@@ -1,74 +1,37 @@
-# Data analysis
-- Document here the project: Olist_Business_Analysis
-- Description: Project Description
-- Data Source:
-- Type of analysis:
+# Decision Science Project - Olist
 
-Please document the project the better you can.
+# Build a class -> Olist()
 
-# Startup the project
+One can read data in a neat way with the help of class.
 
-The initial setup.
+``` bash
 
-Create virtualenv and install the project:
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv ~/venv ; source ~/venv/bin/activate ;\
-    pip install pip -U; pip install -r requirements.txt
+# concat different dfs into a dictionary
+dfs = {}
+for x,y in zip(names,df_list):
+    dfs[x] = y
+
 ```
 
-Unittest test:
-```bash
-make clean install test
+Pandas ProfileReport shows almost everything necessary to get a general view of data.
+
+``` bash
+
+profile = ProfileReport(df,title = i)
+profile.to_file(f"{i}.html")
+
 ```
 
-Check for Olist_Business_Analysis in gitlab.com/{group}.
-If your project is not set please add it:
 
-- Create a new project on `gitlab.com/{group}/Olist_Business_Analysis`
-- Then populate it:
+# Conduct weekly data analysis
 
-```bash
-##   e.g. if group is "{group}" and project_name is "Olist_Business_Analysis"
-git remote add origin git@github.com:{group}/Olist_Business_Analysis.git
-git push -u origin master
-git push -u origin --tags
-```
+pd.to_datetime is a vital preprocessing work to do before plotting data.
 
-Functionnal test with a script:
+'DatetimeIndexResample' helps to reorganize data to show a weekly plot.
 
-```bash
-cd
-mkdir tmp
-cd tmp
-Olist_Business_Analysis-run
-```
+``` bash
 
-# Install
+df['order_approved_at'] = pd.to_datetime(df['order_approved_at'])
+df.set_index('order_approved_at').resample('W').plot()
 
-Go to `https://github.com/{group}/Olist_Business_Analysis` to see the project, manage issues,
-setup you ssh public key, ...
-
-Create a python3 virtualenv and activate it:
-
-```bash
-sudo apt-get install virtualenv python-pip python-dev
-deactivate; virtualenv -ppython3 ~/venv ; source ~/venv/bin/activate
-```
-
-Clone the project and install it:
-
-```bash
-git clone git@github.com:{group}/Olist_Business_Analysis.git
-cd Olist_Business_Analysis
-pip install -r requirements.txt
-make clean install test                # install and test
-```
-Functionnal test with a script:
-
-```bash
-cd
-mkdir tmp
-cd tmp
-Olist_Business_Analysis-run
 ```
