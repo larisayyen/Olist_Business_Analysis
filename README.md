@@ -22,8 +22,32 @@ profile.to_file(f"{i}.html")
 
 ```
 
+# Train data -> Order()
 
-# Conduct weekly data analysis
+Merge several dataframes first to prepare for statistical inference.
+
+``` bash
+
+customers.merge(orders, on='customer_id')\
+         .merge(order_items, on='order_id')\
+         .merge(sellers, on='seller_id')\
+         [['order_id', 'customer_id','customer_zip_code_prefix', 'seller_id', 'seller_zip_code_prefix']]
+
+```
+
+Map your aggregation on specific rows or columns.
+
+``` bash
+
+df.groupby('customer_state').agg({
+    'review_score':[np.mean,state_promoter],
+    'customer_zip_code_prefix':pd.Series.count
+})
+
+```
+
+
+# pd.DataFrame.resample()
 
 pd.to_datetime is a vital preprocessing work to do before plotting data.
 
