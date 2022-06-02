@@ -84,7 +84,6 @@ class Order:
     def distance(self):
 
         #get dfs
-        data = self.data
         orders = self.data['orders'].copy()
         order_items = self.data['order_items'].copy()
         sellers = self.data['sellers'].copy()

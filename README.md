@@ -46,6 +46,37 @@ df.groupby('customer_state').agg({
 
 ```
 
+# Linear model -> statsmodels.formula.api
+
+First, set target and features.
+
+``` bash
+
+# a neat way to define formula
+formula = target + ' ~ ' + ' + '.join(products_selected_features)
+
+```
+
+Second, standardize features if necessary.
+
+``` bash
+
+for f in products_selected_features:
+    mu = products[f].mean()
+    sigma = products[f].std()
+    products_standardized[f] = products[f].map(lambda x: (x - mu) / sigma)
+
+```
+
+Third, output model summary to check statistical significance, coeffiency,std err and etc.
+
+``` bash
+
+import statsmodels.formula.api as smf
+model = smf.ols(formula = formula, data = products_standardized).fit()
+print(model.summary())
+
+```
 
 # pd.DataFrame.resample()
 
